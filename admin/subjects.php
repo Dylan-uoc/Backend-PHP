@@ -61,7 +61,7 @@
 								<tr>
 									<td class="text-center"><?php echo $i++ ?></td>
 									<td class="">
-										<p>Subject: <b><?php echo $row['subject'] ?></b></p>
+										<p>Clases: <b><?php echo $row['subject'] ?></b></p>
 										<p>Description: <small><b><?php echo $row['description'] ?></b></small></p>
 										
 									</td>
@@ -150,5 +150,20 @@
 			}
 		})
 	}
-	$('table').dataTable()
+	$('table').dataTable( {
+        language: {
+            "lengthMenu": "Muestra _MENU_ registros por página",
+            "zeroRecords": "No se encuentra",
+            "info": "Mostrando _PAGE_ of _PAGES_",
+            "infoEmpty": "No hay datos disponibles",
+            "infoFiltered": "(filtrado de un total _MAX_ total records)",
+			"search": "Buscar",
+			"paginate": {
+				"first":      "Primero",
+				"last":       "Ultimo",
+				"next":       "Siguiente",
+				"previous":   "Anterior"
+    },
+        }
+    } )
 </script>

@@ -88,7 +88,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-primary" id='submit' onclick="$('#uni_modal form').submit()">Guardar</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
       </div>
       </div>
     </div>
@@ -97,14 +97,14 @@
     <div class="modal-dialog modal-md" role="document">
       <div class="modal-content">
         <div class="modal-header">
-        <h5 class="modal-title">Confirmation</h5>
+        <h5 class="modal-title">Confirmacion</h5>
       </div>
       <div class="modal-body">
         <div id="delete_content"></div>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" id='confirm' onclick="">Continue</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id='confirm' onclick="">Continuar</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
       </div>
       </div>
     </div>
@@ -207,7 +207,7 @@ window._conf = function($msg='',$func='',$params = []){
       startDate: '+3d'
   })
   $('.select2').select2({
-    placeholder:"Please seleecciona aquí",
+    placeholder:"Por favor selecciona aquí",
     width: "100%"
   })
 </script>	

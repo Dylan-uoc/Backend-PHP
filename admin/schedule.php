@@ -11,7 +11,7 @@
 			<div class="col-md-12">
 				<div class="card">
 					<div class="card-header">
-						<b>Schedule</b>
+						<b>Horario</b>
 						<span class="float:right"><button class="btn btn-primary btn-block btn-sm col-sm-2 float-right"  id="new_schedule">
 					<i class="fa fa-plus"></i> Nueva entrada
 				</button></span>
@@ -88,7 +88,7 @@ a.fc-timegrid-event.fc-v-event.fc-event.fc-event-start.fc-event-end.fc-event-pas
 <script>
 	
 	$('#new_schedule').click(function(){
-		uni_modal('New Schedule','manage_schedule.php','mid-large')
+		uni_modal('Nuevo horario','manage_schedule.php','mid-large')
 	})
 	$('.view_alumni').click(function(){
 		uni_modal("Bio","view_alumni.php?id="+$(this).attr('data-id'),'mid-large')

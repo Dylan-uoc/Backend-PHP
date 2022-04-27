@@ -48,10 +48,10 @@
 								<tr>
 									<th class="text-center">#</th>
 									<th class="">Nif</th>
-									<th class="">Name</th>
+									<th class="">Nombre</th>
 									<th class="">Email</th>
-									<th class="">Contact</th>
-									<th class="text-center">Action</th>
+									<th class="">Contacto</th>
+									<th class="text-center">Accion</th>
 								</tr>
 							</thead>
 							<tbody>

@@ -41,7 +41,7 @@
 			<div class="col-md-8">
 				<div class="card">
 					<div class="card-header">
-						<b>course List</b>
+						<b>Lista de cursos</b>
 					</div>
 					<div class="card-body">
 						<table class="table table-bordered table-hover">
@@ -61,7 +61,7 @@
 								<tr>
 									<td class="text-center"><?php echo $i++ ?></td>
 									<td class="">
-										<p>Course: <b><?php echo $row['course'] ?></b></p>
+										<p>Cursos: <b><?php echo $row['course'] ?></b></p>
 										<p>Description: <small><b><?php echo $row['description'] ?></b></small></p>
 										
 									</td>
