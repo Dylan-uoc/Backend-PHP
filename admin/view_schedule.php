@@ -9,19 +9,19 @@ if(isset($_GET['id'])){
 
 ?>
 <div class="container-fluid">
-	<p>Schedule for: <b><?php echo ucwords($title) ?></b></p>
-	<p>Description: <b><?php echo $description ?></b></p>
-	<p>Location: </i> <b><?php echo $location ?></b></p>
-	<p>Time Start: </i> <b><?php echo date('h:i A',strtotime("2020-01-01 ".$time_from)) ?></b></p>
-	<p>Time End: </i> <b><?php echo date('h:i A',strtotime("2020-01-01 ".$time_to)) ?></b></p>
+	<p>Horario para: <b><?php echo ucwords($title) ?></b></p>
+	<p>Descripcion: <b><?php echo $description ?></b></p>
+	<p>Localizacion: </i> <b><?php echo $location ?></b></p>
+	<p>Hora inicio: </i> <b><?php echo date('h:i A',strtotime("2020-01-01 ".$time_from)) ?></b></p>
+	<p>Hora final: </i> <b><?php echo date('h:i A',strtotime("2020-01-01 ".$time_to)) ?></b></p>
 	<hr class="divider">
 </div>
 <div class="modal-footer display">
 	<div class="row">
 		<div class="col-md-12">
-			<button class="btn float-right btn-secondary" type="button" data-dismiss="modal">Close</button>
-			<button class="btn float-right btn-danger mr-2" type="button" id="delete_schedule">Delete</button>
-			<button class="btn float-right btn-primary mr-2" type="button" id="edit">Edit</button>
+			<button class="btn float-right btn-secondary" type="button" data-dismiss="modal">Cerrar</button>
+			<button class="btn float-right btn-danger mr-2" type="button" id="delete_schedule">Eliminar</button>
+			<button class="btn float-right btn-primary mr-2" type="button" id="edit">Editar</button>
 		</div>
 	</div>
 </div>
