@@ -26,7 +26,7 @@ $rdata= json_decode($repeating_data);
 			<div class="row">
 				<div class="col-md-6">
 					<div class="form-group">
-						<label for="" class="control-label">student</label>
+						<label for="" class="control-label">Alumno</label>
 						<select name="student_id" id="" class="custom-select select2">
 							<option value="0">All</option>
 						<?php 
@@ -41,14 +41,7 @@ $rdata= json_decode($repeating_data);
 						<label for="" class="control-label">Título</label>
 						<textarea class="form-control" name="title" cols="30" rows="3"><?php echo isset($title) ? $title : '' ?></textarea>
 					</div>
-					<!-- <div class="form-group">
-						<label for="" class="control-label">Tipo de calendario</label>
-						<select name="schedule_type" id="" class="custom-select">
-							<option value="1" <?php echo isset($schedule_type) && $schedule_type == 1 ? 'selected' : ''  ?>>Class</option>
-							<option value="2" <?php echo isset($schedule_type) && $schedule_type == 2 ? 'selected' : ''  ?>>Meeting</option>
-							<option value="3" <?php echo isset($schedule_type) && $schedule_type == 3 ? 'selected' : ''  ?>>Others</option>
-						</select>
-					</div> -->
+
 					<div class="form-group">
 						<label for="" class="control-label">Descripcion</label>
 						<textarea class="form-control" name="description" cols="30" rows="3"><?php echo isset($description) ? $description : '' ?></textarea>
