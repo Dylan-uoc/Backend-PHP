@@ -190,7 +190,7 @@ a.fc-timegrid-event.fc-v-event.fc-event.fc-event-start.fc-event-end.fc-event-pas
 				          events: evt,
 				          eventClick: function(e,el) {
 							   var data =  e.event.extendedProps;
-								uni_modal('View Schedule Details','view_schedule.php?id='+data.data_id,'mid-large')
+								uni_modal('Horario detalles','view_schedule.php?id='+data.data_id,'mid-large')
 
 							  }
 				        });
