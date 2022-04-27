@@ -334,7 +334,6 @@ Class Action {
 		extract($_POST);
 		$data = " student_id = '$student_id' ";
 		$data .= ", title = '$title' ";
-		$data .= ", schedule_type = '$schedule_type' ";
 		$data .= ", description = '$description' ";
 		$data .= ", location = '$location' ";
 		if(isset($is_repeating)){
