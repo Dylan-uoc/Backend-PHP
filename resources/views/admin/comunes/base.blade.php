@@ -82,6 +82,19 @@
 
 
     @yield('scripts')
+
+
+    <script>
+        window.start_load = function() {
+            $('body').prepend('<di id="preloader2"></di>')
+        }
+        window.end_load = function() {
+            $('#preloader2').fadeOut('fast', function() {
+                $(this).remove();
+            })
+        }
+    </script>
+
 </body>
 
 </html>
