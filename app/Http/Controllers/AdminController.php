@@ -195,6 +195,25 @@ class AdminController extends Controller
         return back()->with('success', 'Curso eliminado correctamente!');
     }
 
+    public function editarEstudiantes ($id){
+        $estudiante = Estudiante::find($id);
+        return view('admin.estudiantes.editar')->with('estudiante', $estudiante);
+    }
+
+    public function editarEstudiantesFormulario(Request $request, $id){
+        $estudiante = Estudiante::find($id);
+        $estudiante->name = $request->input('name');
+        $estudiante->surname = $request->input('surname');
+        $estudiante->email = $request->input('email');
+        $estudiante->telephone = $request->input('telephone');
+        $estudiante->nif = $request->input('nif');
+        $estudiante->username = $request->input('username');
+        $estudiante->date_registered = $request->input('date_registered');
+        $estudiante->save();
+
+        return back()->with('success', 'Estudiante editado correctamente!');
+    }
+
     /**
      * Show the form for creating a new resource.
      *

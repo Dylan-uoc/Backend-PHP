@@ -28,6 +28,7 @@ Route::get(
     [AdminController::class, 'index']
 )->name('admin');
 
+// Rutas de cursos
 Route::get(
     '/admin/cursos',
     [AdminController::class, 'cursos']
@@ -43,40 +44,16 @@ Route::post(
     [AdminController::class, 'eliminarCursos']
 )->name('eliminarCursos');
 
-Route::get(
-    '/admin/profesores',
-    [AdminController::class, 'profesores']
-)->name('profesores');
-
-Route::get(
-    '/admin/estudiantes',
-    [AdminController::class, 'estudiantes']
-)->name('estudiantes');
-
-Route::get(
-    '/admin/clases',
-    [AdminController::class, 'clases']
-)->name('clases');
-
-Route::get(
-    '/admin/clases/editar/{id}',
-    [AdminController::class, 'editarClases']
-)->name('editarClases');
-
-Route::post(
-    '/admin/clases/{id}/editar',
-    [AdminController::class, 'editarClasesFormulario']
-)->name('editarClasesFormulario');
-
-Route::post(
-    '/admin/clases/eliminar/{id}',
-    [AdminController::class, 'eliminarClases']
-)->name('eliminarClases');
-
 Route::post(
     '/admin/cursos/guardar',
     [AdminController::class, 'guardarCursos']
 )->name('guardarCursos');
+
+// Rutas de profesores
+Route::get(
+    '/admin/profesores',
+    [AdminController::class, 'profesores']
+)->name('profesores');
 
 Route::post(
     '/admin/profesores/guardar',
@@ -97,6 +74,48 @@ Route::post(
     '/admin/profesores/eliminar/{id}',
     [AdminController::class, 'eliminarProfesores']
 )->name('eliminarProfesores');
+
+// Rutas de alumnos
+Route::get(
+    '/admin/estudiantes',
+    [AdminController::class, 'estudiantes']
+)->name('estudiantes');
+
+Route ::post(
+    '/admin/estudiantes/guardar',
+    [AdminController::class, 'guardarEstudiantes']
+)->name('guardarEstudiantes');
+
+Route::get(
+    '/admin/estudiantes/editar/{id}',
+    [AdminController::class, 'editarEstudiantes']
+)->name('editarEstudiantes');
+
+Route::post(
+    '/admin/estudiantes/{id}/editar',
+    [AdminController::class, 'editarEstudiantesFormulario']
+)->name('editarEstudiantesFormulario');
+
+// Rutas de asignaturas
+Route::get(
+    '/admin/clases',
+    [AdminController::class, 'clases']
+)->name('clases');
+
+Route::get(
+    '/admin/clases/editar/{id}',
+    [AdminController::class, 'editarClases']
+)->name('editarClases');
+
+Route::post(
+    '/admin/clases/{id}/editar',
+    [AdminController::class, 'editarClasesFormulario']
+)->name('editarClasesFormulario');
+
+Route::post(
+    '/admin/clases/eliminar/{id}',
+    [AdminController::class, 'eliminarClases']
+)->name('eliminarClases');
 
 Route::post(
     '/admin/clases/guardar',

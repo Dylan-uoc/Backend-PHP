@@ -73,8 +73,8 @@
                                                     <p><b>{{ $estudiante->telephone }}</b></p>
                                                 </td>
                                                 <td class="text-center">
-                                                    <button class="btn btn-sm btn-outline-primary edit_student"
-                                                        type="button" data-id="{{ $estudiante->id }}">Editar</button>
+                                                    <a class="btn btn-sm btn-outline-primary"
+                                                        href="/admin/estudiantes/editar/{{ $estudiante->id }}">Editar</a>
                                                     <button class="btn btn-sm btn-outline-danger delete_student"
                                                         type="button" data-id="{{ $estudiante->id }}">Borrar</button>
                                                 </td>
@@ -145,7 +145,8 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="" class="control-label">Usuario</label>
-                                    <input type="text" class="form-control" name="username" placeholder="Entre el nombre de usuario">
+                                    <input type="text" class="form-control" name="username"
+                                        placeholder="Entre el nombre de usuario">
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -158,7 +159,8 @@
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     <label for="" class="control-label">Fecha Registro</label>
-                                    <input type="date" class="form-control" name="date_registered" placeholder="Entre fecha de registro">
+                                    <input type="date" class="form-control" name="date_registered"
+                                        placeholder="Entre fecha de registro">
                                 </div>
                             </div>
                         </div>

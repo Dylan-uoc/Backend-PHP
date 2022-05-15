@@ -9,5 +9,7 @@ class Estudiante extends Model
 {
     use HasFactory;
 
+    protected $dates = ['date_registered'];
+
     protected $table = 'students';
 }
