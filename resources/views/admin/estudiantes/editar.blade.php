@@ -53,6 +53,7 @@
                                                 name="email" placeholder="Entre el correo">
                                         </div>
                                     </div>
+                                    {{-- Cambiar la fecha que no sale --}}
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <label for="" class="control-label">Fecha de registro</label>
