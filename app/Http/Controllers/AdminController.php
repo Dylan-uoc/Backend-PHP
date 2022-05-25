@@ -34,19 +34,22 @@ class AdminController extends Controller
     public function cursos()
     {
         $cursos = Cursos::all();
-        return view('admin.cursos.index')->with('cursos', $cursos);
+        $usuario = Session::get('usuario');
+        return view('admin.cursos.index')->with('cursos', $cursos)->with('usuario',$usuario);
     }
 
     public function profesores()
     {
         $profesores = Profesor::all();
-        return view('admin.profesores.index')->with('profesores', $profesores);
+        $usuario = Session::get('usuario');
+        return view('admin.profesores.index')->with('profesores', $profesores)->with('usuario',$usuario);
     }
 
     public function estudiantes()
     {
         $estudiantes = Estudiante::all();
-        return view('admin.estudiantes.index')->with('estudiantes', $estudiantes);
+        $usuario = Session::get('usuario');
+        return view('admin.estudiantes.index')->with('estudiantes', $estudiantes)->with('usuario',$usuario);
     }
 
     public function clases()
@@ -55,7 +58,8 @@ class AdminController extends Controller
         $cursos = Cursos::all();
         $profesores = Profesor::all();
         $horarios = Calendario::all();
-        return view('admin.clases.index')->with('clases', $clases)->with('cursos', $cursos)->with('profesores', $profesores)->with('horarios', $horarios);
+        $usuario = Session::get('usuario');
+        return view('admin.clases.index')->with('clases', $clases)->with('cursos', $cursos)->with('profesores', $profesores)->with('horarios', $horarios)->with('usuario',$usuario);
     }
 
     /**
@@ -74,7 +78,9 @@ class AdminController extends Controller
         $curso->active = 1;
         $curso->save();
 
-        return back()->with('success', 'Curso creado correctamente!');
+        $usuario = Session::get('usuario');
+
+        return redirect()->route('cursos')->with('success', 'Curso creado correctamente!')->with('usuario',$usuario);
     }
 
     public function guardarClases(Request $request){
@@ -84,9 +90,10 @@ class AdminController extends Controller
         $clase->id_teacher = $request->input('id_teacher');
         $clase->id_course = $request->input('id_course');
         $clase->id_schedule = $request->input('id_schedule');
+        $usuario = Session::get('usuario');
         $clase->save();
 
-        return back()->with('success', 'Clase creada correctamente!');
+        return back()->with('success', 'Clase creada correctamente!')->with('usuario',$usuario);
     }
 
     public function editarClases($id){
@@ -94,7 +101,8 @@ class AdminController extends Controller
         $cursos = Cursos::all();
         $profesores = Profesor::all();
         $horarios = Calendario::all();
-        return view('admin.clases.editar')->with('clase', $clase)->with('cursos', $cursos)->with('profesores', $profesores)->with('horarios', $horarios);
+        $usuario = Session::get('usuario');
+        return view('admin.clases.editar')->with('clase', $clase)->with('cursos', $cursos)->with('profesores', $profesores)->with('horarios', $horarios)->with('usuario',$usuario);
     }
 
     public function editarClasesFormulario(Request $request, $id){
@@ -104,16 +112,18 @@ class AdminController extends Controller
         $clase->id_teacher = $request->input('id_teacher');
         $clase->id_course = $request->input('id_course');
         $clase->id_schedule = $request->input('id_schedule');
+        $usuario = Session::get('usuario');
         $clase->save();
 
-        return redirect()->route('clases')->with('success', 'Clase editada correctamente!');
+        return redirect()->route('clases')->with('success', 'Clase editada correctamente!')->with('usuario',$usuario);
     }
 
     public function eliminarClases($id){
         $clase = Clase::find($id);
         $clase->delete();
+        $usuario = Session::get('usuario');
 
-        return redirect()->route('clases')->with('success', 'Clase eliminada correctamente!');
+        return redirect()->route('clases')->with('success', 'Clase eliminada correctamente!')->with('usuario',$usuario);
     }
 
     /**
@@ -132,9 +142,10 @@ class AdminController extends Controller
         $estudiante->username = $request->input('username');
         $estudiante->pass = $request->input('pass');
         $estudiante->date_registered = $request->input('date_registered');
+        $usuario = Session::get('usuario');
         $estudiante->save();
 
-        return back()->with('success', 'Estudiante creado correctamente!');
+        return back()->with('success', 'Estudiante creado correctamente!')->with('usuario',$usuario);
     }
 
     public function editarEstudianteFormulario(Request $request,$id){
@@ -148,14 +159,16 @@ class AdminController extends Controller
         $estudiante->pass = $request->input('pass');
         $estudiante->date_registered = $request->input('date_registered');
         $estudiante->save();
+        $usuario = Session::get('usuario');
 
-        return redirect()->route('estudiantes')->with('success', 'Estudiante editado correctamente!');
+        return redirect()->route('estudiantes')->with('success', 'Estudiante editado correctamente!')->with('usuario',$usuario);
     }
 
     public function eliminarEstudiantes($id){
         $estudiante = Estudiante::find($id);
         $estudiante->delete();
-        return redirect()->route('estudiantes')->with('success', 'Estudiante eliminado correctamente!');
+        $usuario = Session::get('usuario');
+        return redirect()->route('estudiantes')->with('success', 'Estudiante eliminado correctamente!')->with('usuario',$usuario);
     }
 
     /**
@@ -173,18 +186,21 @@ class AdminController extends Controller
         $profesor->telephone = $request->input('telephone');
         $profesor->nif = $request->input('nif');
         $profesor->save();
+        $usuario = Session::get('usuario');
 
-        return back()->with('success', 'Profesor creado correctamente!');
+        return back()->with('success', 'Profesor creado correctamente!')->with('usuario',$usuario);
     }
 
     public function editarProfesores($id){
         $profesor = Profesor::find($id);
-        return view('admin.profesores.editar')->with('profesor', $profesor);
+        $usuario = Session::get('usuario');
+        return view('admin.profesores.editar')->with('profesor', $profesor)->with('usuario',$usuario);
     }
 
     public function editarEstudiantes($id){
         $estudiante = Estudiante::find($id);
-        return view('admin.estudiantes.editar')->with('estudiante', $estudiante);
+        $usuario = Session::get('usuario');
+        return view('admin.estudiantes.editar')->with('estudiante', $estudiante)->with('usuario',$usuario);
     }
 
     public function editarProfesoresFormulario(Request $request, $id){
@@ -195,15 +211,17 @@ class AdminController extends Controller
         $profesor->telephone = $request->input('telephone');
         $profesor->nif = $request->input('nif');
         $profesor->save();
+        $usuario = Session::get('usuario');
 
-        return redirect()->route('profesores')->with('success', 'Profesor editado correctamente!');
+        return redirect()->route('profesores')->with('success', 'Profesor editado correctamente!')->with('usuario',$usuario);
     }
 
     public function eliminarProfesores($id){
         $profesor = Profesor::find($id);
         $profesor->delete();
+        $usuario = Session::get('usuario');
 
-        return redirect()->route('profesores')->with('success', 'Profesor eliminado correctamente!');
+        return redirect()->route('profesores')->with('success', 'Profesor eliminado correctamente!')->with('usuario',$usuario);
     }
 
     public function editarCursos(Request $request, $id){
@@ -213,15 +231,17 @@ class AdminController extends Controller
         $curso->date_start = $request->input('date_start');
         $curso->date_end = $request->input('date_end');
         $curso->save();
+        $usuario = Session::get('usuario');
 
-        return back()->with('success', 'Curso editado correctamente!');
+        return redirect()->route('cursos')->with('success', 'Curso editado correctamente!')->with('usuario',$usuario);
     }
 
     public function eliminarCursos($id){
         $curso = Cursos::find($id);
         $curso->delete();
+        $usuario = Session::get('usuario');
 
-        return back()->with('success', 'Curso eliminado correctamente!');
+        return back()->with('success', 'Curso eliminado correctamente!')->with('usuario',$usuario);
     }
 
     /**
@@ -293,19 +313,22 @@ class AdminController extends Controller
     public function examenes($id){
         $examenes = Examen::where('id_class','=',$id)->get();
         $clase = Clase::find($id);
-        return view('admin.examenes.index')->with('examenes',$examenes)->with('clase',$clase);
+        $usuario = Session::get('usuario');
+        return view('admin.examenes.index')->with('examenes',$examenes)->with('clase',$clase)->with('usuario',$usuario);
     }
 
     public function trabajos($id){
         $trabajos = Trabajo::where('id_class','=',$id)->get();
         $clase = Clase::find($id);
-        return view('admin.trabajos.index')->with('trabajos',$trabajos)->with('clase',$clase);
+        $usuario = Session::get('usuario');
+        return view('admin.trabajos.index')->with('trabajos',$trabajos)->with('clase',$clase)->with('usuario',$usuario);
     }
 
     public function calendario(){
         $examenes = Examen::all();
         $trabajos = Trabajo::all();
         $clases = Clase::all();
+        $usuario = Session::get('usuario');
 
         $events = array();
 
@@ -328,30 +351,32 @@ class AdminController extends Controller
         INNER JOIN students ON students.id = exams.id_student
         WHERE exams.id = ?', [3]);
 
-        return view('admin.calendario.index')->with('examenes',$events);
+        return view('admin.calendario.index')->with('examenes',$events)->with('usuario',$usuario);
     }
 
     public function informacionExamenes($id){
-    
+
         $examen = DB::select('SELECT class.name as nombreClase, students.name as nombreEstudiante, students.surname as apellidosEstudiante, exams.name as nombreExamen, exams.mark as notaExamen, exams.fecha as fechaExamen FROM `exams`
         INNER JOIN class ON class.id = exams.id_class
         INNER JOIN students ON students.id = exams.id_student
         WHERE exams.id = ?', [$id]);
         $examen = json_encode($examen);
         echo $examen;
+        $usuario = Session::get('usuario');
     }
 
-    public function informacionTrabajos($id){    
+    public function informacionTrabajos($id){
         $work = DB::select('SELECT class.name as nombreClase, students.name as nombreEstudiante, students.surname as apellidosEstudiante, works.name as nombreTrabajo, works.mark as notaTrabajo, works.fecha as fechaTrabajo FROM `works`
         INNER JOIN class ON class.id = works.id_class
         INNER JOIN students ON students.id = works.id_student
         WHERE works.id = ?', [$id]);
         $work = json_encode($work);
         echo $work;
+        $usuario = Session::get('usuario');
     }
 
     public function informacionClase($id){
-        $clase = DB::select('SELECT teachers.name as nombreProfesor, teachers.surname as apellidosProfesor, courses.name as nombreCurso, schedule.day as fechaClase, 
+        $clase = DB::select('SELECT teachers.name as nombreProfesor, teachers.surname as apellidosProfesor, courses.name as nombreCurso, schedule.day as fechaClase,
         class.name as nombreClase
         FROM class
         INNER JOIN teachers ON teachers.id = class.id_teacher
@@ -360,6 +385,7 @@ class AdminController extends Controller
         WHERE class.id = ?',[$id]);
         $clase = json_encode($clase);
         echo $clase;
+        $usuario = Session::get('usuario');
     }
-    
+
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Administrador;
 use App\Models\Estudiante;
 use App\Models\Profesor;
 use App\Models\User;
@@ -94,11 +95,11 @@ class LoginController extends Controller
 
         switch ($tipo_usuario) {
             case 'students':
-                
+
                 $estudiante = Estudiante::where('email','=',$username)->where('pass','=',$password)->first();
 
                 if($estudiante != null){
-                   
+
                     session(["usuario" => $estudiante]);
                     session(["role" => "students"]);
 
@@ -114,7 +115,7 @@ class LoginController extends Controller
                 $profesor = Profesor::where('email','=',$username)->where('nif','=',$password)->first();
 
                 if($profesor != null){
-                   
+
                     session(["usuario" => $profesor]);
                     session(["role" => "teachers"]);
 
@@ -126,10 +127,10 @@ class LoginController extends Controller
                 break;
 
             case 'users_admin':
-                $admin = User::where('email','=',$username)->where('password','=',$password)->first();
+                $admin = Administrador::where('email','=',$username)->where('password','=',$password)->first();
 
                 if($admin != null){
-                   
+
                     session(["usuario" => $admin]);
                     session(["role" => "users_admin"]);
 
