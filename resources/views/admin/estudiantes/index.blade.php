@@ -73,9 +73,9 @@
                                                     <p><b>{{ $estudiante->telephone }}</b></p>
                                                 </td>
                                                 <td class="text-center">
-                                                    <button class="btn btn-sm btn-outline-primary edit_student"
-                                                        type="button" data-id="{{ $estudiante->id }}">Editar</button>
-                                                    <button class="btn btn-sm btn-outline-danger delete_student"
+                                                    <a href="/admin/estudiantes/{{$estudiante->id}}/editar" class="btn btn-sm btn-outline-primary edit_student"
+                                                        type="button">Editar</a>
+                                                    <button class="btn btn-sm btn-outline-danger eliminar_estudiante"
                                                         type="button" data-id="{{ $estudiante->id }}">Borrar</button>
                                                 </td>
                                             </tr>
@@ -173,6 +173,30 @@
             </div>
         </div>
     </div>
+
+    <div class="modal fade" id="modalEliminarEstudiante" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Eliminar Estudiante</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form class="formularioEliminar" action="" method="POST">
+                    @csrf
+                    <div class="modal-body">
+                        <h6 class="text-justify">¿Estás seguro que deseas eliminar este estudiante? Tener en cuenta que este estudiante puede estar inscrito a cursos, tener exámenes y trabajos asociados de clases.</h6>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Eliminar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('scripts')
@@ -193,6 +217,12 @@
                         "previous": "Anterior"
                     },
                 }
+            });
+
+            $('.eliminar_estudiante').click(function() {
+                var id = $(this).data('id');
+                $('.formularioEliminar').attr('action', '/admin/estudiantes/eliminar/' + id);
+                $('#modalEliminarEstudiante').modal('show');
             });
         });
     </script>

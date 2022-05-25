@@ -6,8 +6,11 @@ use App\Models\Calendario;
 use App\Models\Clase;
 use App\Models\Cursos;
 use App\Models\Estudiante;
+use App\Models\Examen;
 use App\Models\Profesor;
+use App\Models\Trabajo;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
@@ -19,7 +22,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        return view('admin.index');
+        $admin = Session::get('usuario');
+        return view('admin.index')->with('usuario',$admin);
     }
 
     /**
@@ -29,7 +33,6 @@ class AdminController extends Controller
      */
     public function cursos()
     {
-
         $cursos = Cursos::all();
         return view('admin.cursos.index')->with('cursos', $cursos);
     }
@@ -134,6 +137,27 @@ class AdminController extends Controller
         return back()->with('success', 'Estudiante creado correctamente!');
     }
 
+    public function editarEstudianteFormulario(Request $request,$id){
+        $estudiante = Estudiante::find($id);
+        $estudiante->name = $request->input('name');
+        $estudiante->surname = $request->input('surname');
+        $estudiante->email = $request->input('email');
+        $estudiante->telephone = $request->input('telephone');
+        $estudiante->nif = $request->input('nif');
+        $estudiante->username = $request->input('username');
+        $estudiante->pass = $request->input('pass');
+        $estudiante->date_registered = $request->input('date_registered');
+        $estudiante->save();
+
+        return redirect()->route('estudiantes')->with('success', 'Estudiante editado correctamente!');
+    }
+
+    public function eliminarEstudiantes($id){
+        $estudiante = Estudiante::find($id);
+        $estudiante->delete();
+        return redirect()->route('estudiantes')->with('success', 'Estudiante eliminado correctamente!');
+    }
+
     /**
      * Store a newly created resource in storage.
      *
@@ -156,6 +180,11 @@ class AdminController extends Controller
     public function editarProfesores($id){
         $profesor = Profesor::find($id);
         return view('admin.profesores.editar')->with('profesor', $profesor);
+    }
+
+    public function editarEstudiantes($id){
+        $estudiante = Estudiante::find($id);
+        return view('admin.estudiantes.editar')->with('estudiante', $estudiante);
     }
 
     public function editarProfesoresFormulario(Request $request, $id){
@@ -260,4 +289,77 @@ class AdminController extends Controller
     {
         //
     }
+
+    public function examenes($id){
+        $examenes = Examen::where('id_class','=',$id)->get();
+        $clase = Clase::find($id);
+        return view('admin.examenes.index')->with('examenes',$examenes)->with('clase',$clase);
+    }
+
+    public function trabajos($id){
+        $trabajos = Trabajo::where('id_class','=',$id)->get();
+        $clase = Clase::find($id);
+        return view('admin.trabajos.index')->with('trabajos',$trabajos)->with('clase',$clase);
+    }
+
+    public function calendario(){
+        $examenes = Examen::all();
+        $trabajos = Trabajo::all();
+        $clases = Clase::all();
+
+        $events = array();
+
+        foreach($examenes as $examen){
+            $events[] = array("id"=>$examen->id,"tipo"=>"examen","color"=>"blue","title"=>$examen->name, "start"=>date("Y-m-d",strtotime($examen->fecha)));
+        }
+
+        foreach($trabajos as $trabajo){
+            $events[] = array("id"=>$trabajo->id,"tipo"=>"trabajo","color"=>"green","title"=>$trabajo->name, "start"=>date("Y-m-d",strtotime($trabajo->fecha)));
+        }
+
+        foreach($clases as $clase){
+            $fecha = Calendario::find($clase->id_schedule)->day;
+            $events[] = array("id"=>$clase->id,"tipo"=>"clase","color"=>$clase->color,"title"=>$clase->name, "start"=>date("Y-m-d",strtotime($fecha)));
+        }
+
+
+        $examen = DB::select('SELECT class.name as nombreClase, students.name as nombreEstudiante, students.surname as apellidosEstudiante, exams.name as nombreExamen, exams.mark as notaExamen, exams.fecha as fechaExamen FROM `exams`
+        INNER JOIN class ON class.id = exams.id_class
+        INNER JOIN students ON students.id = exams.id_student
+        WHERE exams.id = ?', [3]);
+
+        return view('admin.calendario.index')->with('examenes',$events);
+    }
+
+    public function informacionExamenes($id){
+    
+        $examen = DB::select('SELECT class.name as nombreClase, students.name as nombreEstudiante, students.surname as apellidosEstudiante, exams.name as nombreExamen, exams.mark as notaExamen, exams.fecha as fechaExamen FROM `exams`
+        INNER JOIN class ON class.id = exams.id_class
+        INNER JOIN students ON students.id = exams.id_student
+        WHERE exams.id = ?', [$id]);
+        $examen = json_encode($examen);
+        echo $examen;
+    }
+
+    public function informacionTrabajos($id){    
+        $work = DB::select('SELECT class.name as nombreClase, students.name as nombreEstudiante, students.surname as apellidosEstudiante, works.name as nombreTrabajo, works.mark as notaTrabajo, works.fecha as fechaTrabajo FROM `works`
+        INNER JOIN class ON class.id = works.id_class
+        INNER JOIN students ON students.id = works.id_student
+        WHERE works.id = ?', [$id]);
+        $work = json_encode($work);
+        echo $work;
+    }
+
+    public function informacionClase($id){
+        $clase = DB::select('SELECT teachers.name as nombreProfesor, teachers.surname as apellidosProfesor, courses.name as nombreCurso, schedule.day as fechaClase, 
+        class.name as nombreClase
+        FROM class
+        INNER JOIN teachers ON teachers.id = class.id_teacher
+        INNER JOIN courses ON courses.id = class.id_course
+        INNER JOIN schedule ON schedule.id = class.id_schedule
+        WHERE class.id = ?',[$id]);
+        $clase = json_encode($clase);
+        echo $clase;
+    }
+    
 }

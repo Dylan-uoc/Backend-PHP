@@ -11,7 +11,7 @@
                     class="fa fa-user-tie"></i></span> Lista de profesores</a>
                     <a href="/admin/estudiantes" class="nav-item nav-faculty  {!! (Route::is('estudiantes') ? 'active' : '') !!}"><span class='icon-field'><i
                                 class="fa fa-user"></i></span> Lista de estudiantes</a>
-        <a href="index.php?page=schedule" class="nav-item nav-schedule"><span class='icon-field'><i
+        <a href="/admin/calendario" class="nav-item nav-schedule"><span class='icon-field'><i
                     class="fa fa-calendar-day"></i></span> Schedule</a>
     </div>
 
