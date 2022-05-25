@@ -73,6 +73,10 @@
                                                         href="/admin/clases/editar/{{ $clase->id }}">Editar</a>
                                                     <button class="btn btn-sm btn-outline-danger eliminar_clase"
                                                         type="button" data-id="{{ $clase->id }}">Borrar</button>
+                                                    <a href="/admin/clases/{{$clase->id}}/examenes" class="btn btn-sm btn-outline-success"
+                                                        type="button">Exámenes</a>
+                                                        <a href="/admin/clases/{{$clase->id}}/trabajos" class="btn btn-sm btn-outline-dark"
+                                                            type="button">Trabajos</a>
                                                 </td>
                                             </tr>
                                         @endforeach
